@@ -26,4 +26,4 @@ Desenvolver um sistema web intuitivo que permita a gestão centralizada do ciclo
 * **Samuel Gomes:** Analista de Requisitos
 * **Henry Gabriel:** Modelagem e Banco de Dados
 * **João Elis:** Desenvolvimento do Sistema
-* **Cauã:** Testes e Apresentação
+* **João Elis e Henry Gabriel:** Testes e Apresentação
