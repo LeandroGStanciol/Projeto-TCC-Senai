@@ -2,73 +2,57 @@ package com.onemonth.backend.controller;
 
 
 import com.onemonth.backend.model.Produto;
-import com.onemonth.backend.repository.ProdutoRepository;
+
+import com.onemonth.backend.service.ProdutoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 public class ProdutoController {
 
-    private final ProdutoRepository repository;
+    private final ProdutoService service;
 
-    public ProdutoController(ProdutoRepository repository) {
-        this.repository = repository;
+    public ProdutoController(ProdutoService service) {
+        this.service = service;
     }
 
     @GetMapping("/produtos")
     public List<Produto> listarProdutos(){
-        return  repository.findAll();
+        return  service.listarProdutos();
     }
 
     @GetMapping("/produtos/{id}")
     public ResponseEntity<Produto> buscarPorId(@PathVariable Long id) {
 
-        Optional<Produto> produto = repository.findById(id);
+        Produto produto = service.buscarPorId(id);
+        return ResponseEntity.ok(produto);
 
-        if (produto.isPresent()) {
-            return ResponseEntity.ok(produto.get());
-        }
-
-        return ResponseEntity.notFound().build();
     }
 
     @PostMapping("/produtos")
     public Produto cadastrarProduto(@RequestBody Produto produto){
-        return repository.save(produto);
+        return service.cadastrarProduto(produto);
     }
 
 
     @DeleteMapping("/produtos/{id}")
     public ResponseEntity<Void> deletarProduto(@PathVariable Long id){
 
-        if(!repository.existsById(id)){
-            return ResponseEntity.notFound().build();
-        }
-        repository.deleteById(id);
-
+        service.deletarProduto(id);
         return ResponseEntity.noContent().build();
+
     }
 
-    @PutMapping("produtos/{id}")
+    @PutMapping("/produtos/{id}")
     public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @RequestBody Produto produtoAtualizado){
 
-        Optional<Produto> produtoExistente = repository.findById(id);
+        produtoAtualizado.setId(id);
 
-        if(produtoExistente.isPresent()){
+        Produto produto = service.atualizarProduto(produtoAtualizado);
 
-            Produto produto = produtoExistente.get();
+        return ResponseEntity.ok(produto);
 
-            produto.setNome(produtoAtualizado.getNome());
-            produto.setDescricao(produtoAtualizado.getDescricao());
-
-            Produto produtoSalvo = repository.save(produto);
-
-            return ResponseEntity.ok(produtoSalvo);
-        }
-
-        return ResponseEntity.notFound().build();
     }
 }
