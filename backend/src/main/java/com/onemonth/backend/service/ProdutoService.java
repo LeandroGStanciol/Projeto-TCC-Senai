@@ -24,6 +24,12 @@ public class ProdutoService {
         if(produto.getDescricao() == null || produto.getDescricao().isBlank()){
             throw new IllegalArgumentException("Campo descrição é obrigatório!");
         }
+        if(produto.getStatusProduto() == null){
+            throw new IllegalArgumentException("Status obrigatório!");
+        }
+        if(produto.getUsuario() == null){
+            throw new IllegalArgumentException("Usuário obrigatório!");
+        }
     }
 
     public void validarExistenciaProduto(Long id){
