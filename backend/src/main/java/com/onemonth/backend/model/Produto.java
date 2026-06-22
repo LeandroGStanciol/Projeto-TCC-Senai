@@ -10,8 +10,23 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String nome;
+
+    @Column(nullable = false)
     private String descricao;
+
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
+
+
+    @ManyToOne
+    @JoinColumn(name = "idStatus")
+    private StatusProduto statusProduto;
+
+
 
     public Produto() {
     }
@@ -38,5 +53,21 @@ public class Produto {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public StatusProduto getStatusProduto() {
+        return statusProduto;
+    }
+
+    public void setStatusProduto(StatusProduto statusProduto) {
+        this.statusProduto = statusProduto;
     }
 }
