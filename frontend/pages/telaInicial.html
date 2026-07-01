@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OneMonth - Dashboard</title>
+    <title>OneMonth - Tela Inicial</title>
 
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/telaInicial.css">
 
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -20,8 +20,6 @@
 
         <div class="usuario">
 
-            <i class="fa-solid fa-bell"></i>
-
             <div class="perfil">
                 <i class="fa-regular fa-circle-user"></i>
                 <span>Leandro</span>
@@ -29,7 +27,7 @@
 
             <a href="#" id="btnLogout">
                 Deslogar
-            <i class="fa-solid fa-right-from-bracket"></i>
+                <i class="fa-solid fa-right-from-bracket"></i>
             </a>
 
         </div>
@@ -41,39 +39,35 @@
         <aside>
 
             <div class="logoLateral">
-
                 <h1>OneMonth</h1>
-
                 <p>
                     Sistema de gestão do ciclo de vida de produtos
                 </p>
-
             </div>
 
             <ul>
-
                 <li class="ativo">
                     <i class="fa-solid fa-house"></i>
                     Início
                 </li>
 
                 <li>
-                    <i class="fa-solid fa-box"></i>
+                    <i class="fa-solid fa-boxes-stacked"></i>
                     Produtos
                 </li>
 
                 <li>
-                    <i class="fa-solid fa-book"></i>
+                    <i class="fa-solid fa-kitchen-set"></i>
                     Receitas
                 </li>
 
                 <li>
-                    <i class="fa-solid fa-file"></i>
+                    <i class="fa-solid fa-code-branch"></i>
                     Versões
                 </li>
 
                 <li>
-                    <i class="fa-solid fa-industry"></i>
+                    <i class="fa-solid fa-gears"></i>
                     Produção
                 </li>
 
@@ -83,130 +77,83 @@
                 </li>
 
                 <li>
-                    <i class="fa-solid fa-chart-column"></i>
-                    Relatórios
-                </li>
-
-                <li>
                     <i class="fa-solid fa-users"></i>
                     Usuários
                 </li>
 
                 <li>
-                    <i class="fa-solid fa-gear"></i>
-                    Configurações
+                    <i class="fa-solid fa-sliders"></i>
+                    Configuração
                 </li>
-
             </ul>
 
         </aside>
 
         <main>
 
-            <div class="boasVindas">
+            <div>
 
-                <h2>Olá Leandro! 👋</h2>
-
-                <h1>Bem vindo a OneMonth.</h1>
-
-            </div>
-
-            <div class="topoDashboard">
-
-                <section class="novoProduto">
-
+                <div class="novoProduto">
                     <div class="overlay">
-
-                        <i class="fa-solid fa-plus"></i>
-
-                        <h2>Adicionar novo produto</h2>
-
+                        <i class="fa-solid fa-circle-plus"></i>
+                        <h2>Novo Produto</h2>
                     </div>
+                </div>
 
-                </section>
+                <div class="estatisticas">
 
-                <section class="estatisticas">
+    <div class="cardEstatistica">
+        <i class="fa-solid fa-box"></i>
+        <h3>Produtos Cadastrados</h3>
+        <p>12</p>
+    </div>
 
-                    <div class="cardEstatistica">
+    <div class="cardEstatistica">
+        <i class="fa-solid fa-code-branch"></i>
+        <h3>Versões Cadastradas</h3>
+        <p>4</p>
+    </div>
 
-                        <i class="fa-solid fa-bag-shopping"></i>
+    <div class="cardEstatistica">
+        <i class="fa-solid fa-kitchen-set"></i>
+        <h3>Receitas em Produção</h3>
+        <p>22</p>
+    </div>
 
-                        <h2>128</h2>
+    <div class="cardEstatistica statusEstoque estoque-critico">
+        <i class="fa-solid fa-cubes-stacked"></i>
+        <h3 id="tituloEstoque">Estoque Baixo</h3>
+        <p id="valorEstoque">2</p>
+    </div>
 
-                        <p>Produtos Cadastrados</p>
-
-                        <a href="#">Ver todos</a>
-
-                    </div>
-
-                    <div class="cardEstatistica">
-
-                        <i class="fa-solid fa-layer-group"></i>
-
-                        <h2>348</h2>
-
-                        <p>Versões de Receitas</p>
-
-                        <a href="#">Ver todos</a>
-
-                    </div>
-
-                    <div class="cardEstatistica">
-
-                        <i class="fa-solid fa-clipboard-list"></i>
-
-                        <h2>27</h2>
-
-                        <p>Receitas em Produção</p>
-
-                        <a href="#">Ver todos</a>
-
-                    </div>
-
-                    <div class="cardEstatistica">
-
-                        <i class="fa-solid fa-box-open"></i>
-
-                        <h2>15</h2>
-
-                        <p>Estoque Baixo</p>
-
-                        <a href="#">Ver todos</a>
-
-                    </div>
-
-                </section>
+</div>
 
             </div>
 
-            <section class="tabela">
+            <section>
 
-                <h3>Exemplo de Tabela</h3>
+                <h2>Últimos Lotes Cadastrados</h2>
 
                 <table>
 
                     <thead>
-
                         <tr>
-                            <th>ID</th>
-                            <th>Nome</th>
+                            <th>Código</th>
+                            <th>Responsável</th>
                             <th>Produto</th>
-                            <th>Quant.</th>
-                            <th>Data</th>
+                            <th>Quantidade</th>
+                            <th>Vencimento</th>
                         </tr>
-
                     </thead>
 
                     <tbody>
-
                         <tr>
-                            <td>121231</td>
-                            <td>João</td>
+                            <td>124142</td>
+                            <td>Leandro</td>
                             <td>Pão</td>
                             <td>12</td>
                             <td>12/06/2026</td>
                         </tr>
-
                         <tr>
                             <td>124141</td>
                             <td>Leandro</td>
@@ -214,7 +161,6 @@
                             <td>4</td>
                             <td>04/07/2026</td>
                         </tr>
-
                         <tr>
                             <td>52523</td>
                             <td>Samuel</td>
@@ -222,7 +168,6 @@
                             <td>22</td>
                             <td>22/05/2026</td>
                         </tr>
-
                         <tr>
                             <td>22222</td>
                             <td>Henrique</td>
@@ -230,7 +175,6 @@
                             <td>200</td>
                             <td>12/05/2026</td>
                         </tr>
-
                         <tr>
                             <td>124312</td>
                             <td>Priscila</td>
@@ -238,7 +182,6 @@
                             <td>2000</td>
                             <td>20/08/2026</td>
                         </tr>
-
                     </tbody>
 
                 </table>
@@ -249,7 +192,7 @@
 
     </div>
     
-    <script src="../js/dashboard.js"></script>
+    <script src="../js/telaInicial.js"></script>
 
 </body>
 

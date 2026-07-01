@@ -4,66 +4,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>OneMonth - Login</title>
+
     <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <title>OneMonth - Login</title>
-
 </head>
-<header>
-
-    <div class="logoTopo">OneMonth</div>
-
-    <nav>
-        <a href="cadastro.html">Cadastrar</a>
-    </nav>
-
-</header>
-
 <body>
+    <header>
 
-    <div class = "container">
+        <div class="logoTopo">OneMonth</div>
 
-        <div class = "imagem">
-            <h1>OneMonth</h1>
-        </div>
+        <nav>
+            <a href="cadastro.html">Cadastrar</a>
+        </nav>
 
-        <div class = "login">
+    </header>
 
-            <div class = "card">
+        <main class = "container">
 
-                <h2>Login</h2>
+            <section class = "imagem">
+            </section>
 
-                <label for="usuario">Usuário</label>
-                <div class="campo">
-                <i class="fa-solid fa-user"></i>
-                <input type="text" id="usuario" placeholder="Digite seu usuário"></div>
+            <section class = "login">
+
+                <div class = "card">
+
+                    <form id="formLogin">
+
+                    <h2>Login</h2>
+
+                    <label for="usuario">Usuário</label>
+
+                    <div class="campo">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <input type="text"
+                        id="usuario" 
+                        name="usuario" 
+                        placeholder="Digite seu usuário" 
+                        autocomplete="username" 
+                        aria-label="Usuário"
+                        required>
+                    </div>
+
+                    <p class="erro" id="erroUsuario">Usuário inválido</p>
+
+                    <label for="senha">Senha</label>
+
+<div class="campo">
+    <input 
+        type="password"
+        id="senha"
+        name="senha" 
+        placeholder="Digite sua senha" 
+        autocomplete="current-password" 
+        aria-label="Senha"
+        required>
+
+    <i class="fa-solid fa-eye" id="toggleSenha"></i>
+</div>
+
+                    <p class="erro" id="erroSenha"></p>
+
+                    <a href="#" class="esqueciSenha">
+                        Esqueci minha senha
+                    </a>
+
+                    <button type="submit">
+                        Entrar
+                    </button>
+
+                </form>
                 
-                <label for="senha">Senha</label>
-
-                <div class="campo">
-
-                <i class="fa-solid fa-lock"></i>
-
-                <input type="password" id="senha" placeholder="Digite sua senha">
-
-            </div>
-                <a href="#" class="esqueciSenha">
-                    Esqueci minha senha
-                </a>
-                <button id="btnEntrar">
-                    Entrar
-                </button>
                 <p class="cadastro">
+                
                     Não possui conta?
-                    <a href="cadastro.html">Cadastrar-se</a>
-                </p>
+                    <a href="telaInicial.html">
+                        Cadastrar-se
+                    </a>
 
+                </p>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <script src="../js/login.js"></script>
-    
 </body>
 </html>
