@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
             ValidationException ex){
 
         ErrorResponse erro = new ErrorResponse(
-                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.BAD_REQUEST.value(),
                 ex.getMessage()
         );
 
