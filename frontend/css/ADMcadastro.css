@@ -16,14 +16,14 @@ html, body {
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: hidden; /* Mantém a tela principal fixa */
 }
 
 /* ==========================================================================
-   2. CABEÇALHO (HEADER)
+   2. CABEÇALHO (HEADER) - IDÊNTICO AO LOGIN
    ========================================================================== */
 header {
-    background-color: #331E11;
+    background-color: #331E11; /* Marrom escuro */
     color: #ffffff;
     display: flex;
     justify-content: space-between;
@@ -52,7 +52,7 @@ header nav a:hover {
 }
 
 /* ==========================================================================
-   3. CONTAINER PRINCIPAL (DIVISÃO DO ECRÃ)
+   3. CONTAINER PRINCIPAL (DIVISÃO DA TELA)
    ========================================================================== */
 .container {
     display: flex;
@@ -61,13 +61,12 @@ header nav a:hover {
     width: 100%;
 }
 
-/* Painel Lateral da Imagem */
+/* Painel Lateral da Imagem (Pão) */
 .imagem {
-    flex: 0 0 32%; 
+    flex: 0 0 32%; /* 1/3 da tela horizontal */
     background-color: #b3b3b3;
-    /* CAMINHO CORRIGIDO: apontando para a pasta correta '../img/' */
     background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), 
-                      url('../img/bread2.jpg');
+                      url('../img/bread2.jpg'); /* Caminho corrigido para sua pasta img */
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -77,15 +76,15 @@ header nav a:hover {
     padding: 40px;
 }
 
-/* Texto sobreposto à imagem */
-.imagem::before {
-    content: "OneMonth";
+/* Estilização do H1 já existente no HTML do cadastro */
+.imagem h1 {
     color: #ffffff;
     font-size: 2.8rem;
     font-weight: 700;
     margin-bottom: 10px;
 }
 
+/* Injeção da descrição via CSS para ficar igual ao login */
 .imagem::after {
     content: "Sistema inteligente para gestão do ciclo de vida de produtos.";
     color: #ffffff;
@@ -95,44 +94,46 @@ header nav a:hover {
     max-width: 280px;
 }
 
-/* Painel do Formulário */
-.login {
+/* Painel do Formulário de Cadastro */
+.cadastro {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
-    padding: 20px;
+    padding: 30px 20px;
+    overflow-y: auto; /* Permite rolar o formulário se a tela for pequena */
 }
 
 /* ==========================================================================
-   4. CARTÃO DE LOGIN E INPUTS
+   4. CARTÃO DE CADASTRO E ENTRADAS (INPUTS)
    ========================================================================== */
 .card {
-    background-color: #EFE6DD;
+    background-color: #EFE6DD; /* Bege claro */
     width: 100%;
-    max-width: 450px;
-    padding: 45px 40px;
+    max-width: 480px; /* Um pouco mais largo para acomodar melhor os campos */
+    padding: 35px 40px;
     border-radius: 18px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    margin: auto 0; /* Centraliza verticalmente na área de rolagem */
 }
 
 .card h2 {
     text-align: center;
     color: #331E11;
-    font-size: 2.2rem;
+    font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
     color: #331E11;
     font-weight: 600;
-    font-size: 0.95rem;
-    margin-bottom: 6px;
-    margin-top: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    margin-top: 12px; /* Espaçamento vertical equilibrado */
 }
 
 .campo {
@@ -144,36 +145,82 @@ label {
 
 .campo input {
     width: 100%;
-    padding: 12px 50px 12px 15px; /* Espaço na direita para os ícones */
+    padding: 11px 50px 11px 15px; /* Espaço na direita para os ícones */
     border: 2px solid #331E11;
     border-radius: 12px;
     background-color: transparent;
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: #331E11;
     font-weight: 500;
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-/* Posicionamento dos Ícones (À Direita) */
+/* Posicionamento dos Ícones no Canto Direito */
 .campo i {
     position: absolute;
     right: 18px;
     color: #331E11;
-    font-size: 1.1rem;
+    font-size: 1rem;
     transition: color 0.2s;
 }
 
-.campo i#toggleSenha {
+/* Ícones de alternar senha (olhos) mudam o cursor */
+.campo i#toggleSenha,
+.campo i#toggleConfirmar {
     cursor: pointer;
 }
 
-.campo i#toggleSenha:hover {
+.campo i#toggleSenha:hover,
+.campo i#toggleConfirmar:hover {
     color: #DE9E52;
 }
 
+/* Ícones estáticos (user, envelope) não interferem no clique do input */
+.campo i.fa-user,
+.campo i.fa-envelope {
+    pointer-events: none;
+}
+
 /* ==========================================================================
-   INTEGRAÇÃO COM O JAVASCRIPT (Classes de Validação)
+   5. SELEÇÃO DO TIPO DE USUÁRIO (FIELDSET & RADIOS)
+   ========================================================================== */
+fieldset.tipoUsuario {
+    border: 2px solid #331E11;
+    border-radius: 12px;
+    padding: 12px 15px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+fieldset.tipoUsuario legend {
+    color: #331E11;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0 8px;
+}
+
+.opcao {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 25px;
+    margin-top: 4px;
+    cursor: pointer;
+    color: #331E11;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* Estilização moderna e direta para as bolinhas do Radio */
+.opcao input[type="radio"] {
+    margin-right: 8px;
+    accent-color: #DE9E52; /* Pinta o rádio nativo com a cor caramelo */
+    width: 17px;
+    height: 17px;
+}
+
+/* ==========================================================================
+   6. INTEGRACAO COM O JAVASCRIPT (VALIDAÇÕES DO cadastro.js)
    ========================================================================== */
 .campo.sucesso input {
     border-color: #2E7D32;
@@ -191,41 +238,32 @@ label {
     color: #D32F2F !important;
 }
 
+/* Mensagens de erro embaixo de cada campo e do fieldset */
 .erro {
     color: #D32F2F;
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 500;
     margin-top: 4px;
-    margin-left: 5px;
-    display: none;
+    margin-left: 4px;
+    display: none; /* Ativado via JS alterando para display: block */
 }
 
 /* ==========================================================================
-   BOTOES E LINKS
+   7. BOTÃO E LINKS
    ========================================================================== */
-.esqueciSenha {
-    display: block;
-    text-align: right;
-    color: #331E11;
-    font-size: 0.85rem;
-    font-weight: 500;
-    text-decoration: underline;
-    margin-top: 10px;
-    margin-bottom: 25px;
-}
-
 button[type="submit"] {
     width: 100%;
-    padding: 14px;
-    background-color: #DE9E52;
+    padding: 13px;
+    background-color: #DE9E52; /* Cor Caramelo */
     color: #331E11;
     border: none;
-    border-radius: 30px;
-    font-size: 1rem;
+    border-radius: 30px; /* Formato pílula */
+    font-size: 0.95rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     cursor: pointer;
+    margin-top: 20px;
     transition: background-color 0.2s;
 }
 
@@ -233,26 +271,28 @@ button[type="submit"]:hover {
     background-color: #cb8d43;
 }
 
-.cadastro {
+.loginLink {
     text-align: center;
-    margin-top: 20px;
-    font-size: 0.9rem;
+    margin-top: 18px;
+    font-size: 0.88rem;
     color: #331E11;
     font-weight: 500;
 }
 
-.cadastro a {
+.loginLink a {
     color: #DE9E52;
     text-decoration: none;
     font-weight: 700;
     margin-left: 3px;
 }
 
-.cadastro a:hover {
+.loginLink a:hover {
     text-decoration: underline;
 }
 
-/* RESPONSIVIDADE */
+/* ==========================================================================
+   8. RESPONSIVIDADE (MOBILE)
+   ========================================================================== */
 @media (max-width: 768px) {
     .imagem {
         display: none;
@@ -260,8 +300,11 @@ button[type="submit"]:hover {
     header {
         padding: 0 20px;
     }
+    .cadastro {
+        padding: 15px;
+    }
     .card {
         box-shadow: none;
-        padding: 20px;
+        padding: 25px 20px;
     }
 }
