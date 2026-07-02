@@ -14,135 +14,101 @@
 
 <body>
 
-    <header>
-
-        <h2>Página Inicial</h2>
-
-        <div class="usuario">
-
-            <div class="perfil">
-                <i class="fa-regular fa-circle-user"></i>
-                <span>Leandro</span>
-            </div>
-
-            <a href="#" id="btnLogout">
-                Deslogar
-                <i class="fa-solid fa-right-from-bracket"></i>
-            </a>
-
+    <header role="banner">
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <button id="btnMenuMobile" aria-expanded="false" aria-controls="menuLateral" aria-label="Abrir menu de navegação" class="btn-menu-mobile">
+                <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            </button>
+            <h2>Página Inicial</h2>
         </div>
 
+        <div class="usuario">
+            <div class="perfil">
+                <i class="fa-regular fa-circle-user" aria-hidden="true"></i>
+                <span>Leandro</span>
+            </div>
+            <a href="#" id="btnLogout" aria-label="Sair do sistema">
+                Deslogar
+                <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+            </a>
+        </div>
     </header>
 
     <div class="container">
-
-        <aside>
-
+        <aside id="menuLateral" role="complementary">
             <div class="logoLateral">
                 <h1>OneMonth</h1>
-                <p>
-                    Sistema de gestão do ciclo de vida de produtos
-                </p>
+                <p>Sistema de gestão do ciclo de vida de produtos</p>
             </div>
 
-            <ul>
-                <li class="ativo">
-                    <i class="fa-solid fa-house"></i>
-                    Início
-                </li>
-
-                <li>
-                    <i class="fa-solid fa-boxes-stacked"></i>
-                    Produtos
-                </li>
-
-                <li>
-                    <i class="fa-solid fa-kitchen-set"></i>
-                    Receitas
-                </li>
-
-                <li>
-                    <i class="fa-solid fa-code-branch"></i>
-                    Versões
-                </li>
-
-                <li>
-                    <i class="fa-solid fa-gears"></i>
-                    Produção
-                </li>
-
-                <li>
-                    <i class="fa-solid fa-cubes"></i>
-                    Estoque
-                </li>
-
-                <li>
-                    <i class="fa-solid fa-users"></i>
-                    Usuários
-                </li>
-
-                <li>
-                    <i class="fa-solid fa-sliders"></i>
-                    Configuração
-                </li>
-            </ul>
-
+            <nav aria-label="Navegação Principal">
+                <ul role="menu">
+                    <li class="ativo" role="menuitem" tabindex="0" aria-current="page"><i class="fa-solid fa-house" aria-hidden="true"></i> Início</li>
+                    <li role="menuitem" tabindex="0" onclick="window.location.href='produtos.html'"><i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i> Produtos</li>
+                    <li role="menuitem" tabindex="0" onclick="window.location.href='receitas.html'"><i class="fa-solid fa-kitchen-set" aria-hidden="true"></i> Receitas</li>
+                    <li role="menuitem" tabindex="0" onclick="window.location.href='versoes.html'"><i class="fa-solid fa-code-branch" aria-hidden="true"></i> Versões</li>
+                    <li role="menuitem" tabindex="0" onclick="window.location.href='producao.html'"><i class="fa-solid fa-gears" aria-hidden="true"></i> Produção</li>
+                    <li role="menuitem" tabindex="0" onclick="window.location.href='estoque.html'"><i class="fa-solid fa-cubes" aria-hidden="true"></i> Estoque</li>
+                    <li role="menuitem" tabindex="0" onclick="window.location.href='usuarios.html'"><i class="fa-solid fa-users" aria-hidden="true"></i> Usuários</li>
+                    <li role="menuitem" tabindex="0" onclick="window.location.href='configuracao.html'"><i class="fa-solid fa-sliders" aria-hidden="true"></i> Configuração</li>
+                </ul>
+            </nav>
         </aside>
 
-        <main>
+        <main id="conteudo-principal" role="main">
 
             <div>
 
-                <div class="novoProduto">
+                <div class="novoProduto" role="button" tabindex="0" aria-label="Cadastrar Novo Produto">
                     <div class="overlay">
-                        <i class="fa-solid fa-circle-plus"></i>
+                        <i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
                         <h2>Novo Produto</h2>
                     </div>
                 </div>
 
                 <div class="estatisticas">
 
-    <div class="cardEstatistica">
-        <i class="fa-solid fa-box"></i>
-        <h3>Produtos Cadastrados</h3>
-        <p>12</p>
-    </div>
+                    <div class="cardEstatistica" aria-live="polite">
+                        <i class="fa-solid fa-box" aria-hidden="true"></i>
+                        <h3>Produtos Cadastrados</h3>
+                        <p>0</p>
+                    </div>
 
-    <div class="cardEstatistica">
-        <i class="fa-solid fa-code-branch"></i>
-        <h3>Versões Cadastradas</h3>
-        <p>4</p>
-    </div>
+                    <div class="cardEstatistica" aria-live="polite">
+                        <i class="fa-solid fa-code-branch" aria-hidden="true"></i>
+                        <h3>Versões Cadastradas</h3>
+                        <p>0</p>
+                    </div>
 
-    <div class="cardEstatistica">
-        <i class="fa-solid fa-kitchen-set"></i>
-        <h3>Receitas em Produção</h3>
-        <p>22</p>
-    </div>
+                    <div class="cardEstatistica" aria-live="polite">
+                        <i class="fa-solid fa-kitchen-set" aria-hidden="true"></i>
+                        <h3>Receitas em Produção</h3>
+                        <p>0</p>
+                    </div>
 
-    <div class="cardEstatistica statusEstoque estoque-critico">
-        <i class="fa-solid fa-cubes-stacked"></i>
-        <h3 id="tituloEstoque">Estoque Baixo</h3>
-        <p id="valorEstoque">2</p>
-    </div>
+                    <div class="cardEstatistica" aria-live="polite">
+                        <i class="fa-solid fa-cubes-stacked" aria-hidden="true"></i>
+                        <h3>Estoque Baixo</h3>
+                        <p>0</p>
+                    </div>
 
-</div>
+                </div>
 
             </div>
 
-            <section>
+            <section aria-labelledby="titulo-tabela">
 
-                <h2>Últimos Lotes Cadastrados</h2>
+                <h2 id="titulo-tabela">Últimos Lotes Cadastrados</h2>
 
                 <table>
 
                     <thead>
                         <tr>
-                            <th>Código</th>
-                            <th>Responsável</th>
-                            <th>Produto</th>
-                            <th>Quantidade</th>
-                            <th>Vencimento</th>
+                            <th scope="col">Código</th>
+                            <th scope="col">Responsável</th>
+                            <th scope="col">Produto</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Vencimento</th>
                         </tr>
                     </thead>
 

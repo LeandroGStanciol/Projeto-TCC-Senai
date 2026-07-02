@@ -120,6 +120,7 @@ aside {
     gap: 30px;
     box-shadow: 4px 0 15px rgba(0, 0, 0, 0.03);
     overflow-y: auto; /* Permite rolar os menus se a altura da tela for muito baixa */
+    overflow-x: hidden; /* EVITA barra de rolagem horizontal se o contorno de acessibilidade chegar na borda */
 }
 
 /* Customização sutil da barra de rolagem interna do menu se necessário */
@@ -361,31 +362,121 @@ tr:hover td {
     color: #331E11;
     transition: background-color 0.15s ease;
 }
+/* ==========================================================================
+   6. ACESSIBILIDADE VISUAL (FOCO VIA TECLADO)
+   ========================================================================== */
+a:focus, 
+button:focus, 
+aside ul li:focus-visible {
+    outline: 3px solid #DE9E52;
+    outline-offset: 2px;
+}
 
 /* ==========================================================================
-   6. RESPONSIVIDADE (ADAPTAÇÃO ADAPTÁVEL)
+   8. RESPONSIVIDADE E MENU GAVETA MOBILE (ATÉ 768px)
    ========================================================================== */
-@media (max-width: 1150px) {
-    main > div:first-of-type {
-        flex-direction: column;
-    }
-    .estatisticas {
-        width: 100%;
-    }
+/* Botão Menu Hambúrguer (invisível em ecrãs grandes, adicionado no topo do header) */
+.btn-menu-mobile {
+    display: none;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+.btn-menu-mobile:focus-visible {
+    outline: 2px solid #DE9E52;
 }
 
 @media (max-width: 768px) {
-    aside {
-        display: none; 
+    /* Ativa o botão hambúrguer no telemóvel */
+    .btn-menu-mobile {
+        display: block;
     }
+
     header {
         padding: 0 20px;
     }
+
+    /* O aside vira uma gaveta acessível */
+    aside {
+        position: fixed;
+        top: 70px;
+        left: -100%; /* Escondido fora do ecrã do lado esquerdo */
+        width: 280px;
+        height: calc(100vh - 70px);
+        z-index: 99;
+        transition: left 0.3s ease-in-out;
+    }
+
+    /* Classe dinâmica injetada via JS para fazer o menu deslizar */
+    aside.aberto {
+        left: 0;
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+    }
+
+    /* CORREÇÃO VISUAL: Alinha o bloco "Novo Produto" e "Cards" verticalmente no mobile */
+    main > div {
+        flex-direction: column !important;
+        gap: 20px !important;
+    }
+
+    /* Faz os cards de estatística ocuparem uma coluna única e confortável */
+    .estatisticas {
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
+        gap: 15px !important;
+    }
+
+    .novoProduto {
+        width: 100% !important;
+        height: 140px !important;
+    }
+
+    /* O conteúdo adapta-se para ocupar o ecrã mobile inteiro */
     main {
-        padding: 20px;
+        padding: 15px;
+        width: 100% !important;
+    }
+
+    /* Deixa a tabela rolável lateralmente de forma nativa no telemóvel */
+    section {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    table {
+        min-width: 600px;
     }
     th, td {
         padding: 12px 10px;
         font-size: 0.85rem;
     }
+}
+/* ==========================================================================
+   9. ACESSIBILIDADE E NAVEGAÇÃO POR TECLADO (WCAG)
+   ========================================================================== */
+a:focus, 
+button:focus, 
+aside ul li:focus-visible {
+    outline: 3px solid #DE9E52;
+    outline-offset: 2px;
+}
+
+/* Quando o utilizador usa o TAB, cria uma borda nítida de destaque */
+aside ul li:focus-visible,
+.novoProduto:focus-visible,
+a:focus-visible,
+.btn-menu-mobile:focus-visible {
+    outline: 3px solid #DE9E52 !important;
+    outline-offset: 3px;
+    border-radius: 12px;
+}
+
+/* Garante o contraste de leitura adequado nas linhas da tabela ao passar o rato */
+tr:hover td {
+    background-color: rgba(51, 30, 17, 0.08); 
+    color: #331E11;
 }

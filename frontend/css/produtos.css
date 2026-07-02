@@ -1,0 +1,152 @@
+/* Layout da barra de ações superiores */
+.acoes-produtos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 20px;
+}
+
+.busca-box {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: 1px solid rgba(51, 30, 17, 0.15);
+    padding: 10px 15px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    gap: 10px;
+}
+
+.busca-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.95rem;
+    color: #331E11;
+}
+
+.btn-principal {
+    background-color: #DE9E52;
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.btn-principal:hover {
+    background-color: #c98a41;
+}
+
+/* Customizações de botões da tabela */
+.btn-acao {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 5px;
+    margin-right: 5px;
+}
+.btn-acao.editar { color: #DE9E52; }
+.btn-acao.excluir { color: #cc3333; }
+
+/* ==========================================================================
+   ESTRUTURA DO MODAL FLUTUANTE
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.modal-overlay.ativo {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    background-color: #FDFBF9;
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(51, 30, 17, 0.1);
+    padding-bottom: 10px;
+    color: #331E11;
+}
+
+.btn-fechar {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #331E11;
+}
+
+input, select {
+    padding: 10px;
+    border: 1px solid rgba(51, 30, 17, 0.2);
+    border-radius: 6px;
+    background-color: #fff;
+    color: #331E11;
+    font-size: 0.95rem;
+}
+
+.btn-salvar {
+    background-color: #331E11;
+    color: #ffffff;
+    border: none;
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
+}

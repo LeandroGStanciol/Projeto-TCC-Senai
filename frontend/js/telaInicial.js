@@ -1,5 +1,5 @@
 // ==========================================================================
-// 1. CONTROLE DE ACESSO E SESSÃO (PROTEÇÃO DA TELA)
+// 1. CONTROLE DE ACESSO, SESSÃO E MENU MOBILE (PROTEÇÃO DA TELA)
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
     // Verifica se há um usuário logado na sessão
@@ -17,6 +17,21 @@ document.addEventListener("DOMContentLoaded", () => {
         nomePerfil.textContent = usuarioLogado.nome;
     }
 
+    // --- LOGICA DE ACESSIBILIDADE E CLIQUES DO MENU MOBILE ---
+    const btnMenuMobile = document.getElementById("btnMenuMobile");
+    const menuLateral = document.getElementById("menuLateral");
+
+    if (btnMenuMobile && menuLateral) {
+        btnMenuMobile.addEventListener("click", () => {
+            // Alterna a classe que faz a gaveta deslizar no CSS
+            const estaAberto = menuLateral.classList.toggle("aberto");
+            
+            // Atualiza os leitores de ecrã dinamicamente se está aberto ou fechado
+            btnMenuMobile.setAttribute("aria-expanded", estaAberto);
+            btnMenuMobile.setAttribute("aria-label", estaAberto ? "Fechar menu de navegação" : "Abrir menu de navegação");
+        });
+    }
+
     // Inicializa as funções da Tela Inicial
     carregarMetricasDinamicas();
     configurarNavegacaoLateral();
@@ -27,47 +42,29 @@ document.addEventListener("DOMContentLoaded", () => {
 // 2. CARREGAMENTO DE MÉTRICAS E LÓGICA DO ESTOQUE CRÍTICO
 // ==========================================================================
 function carregarMetricasDinamicas() {
-    // CORRIGIDO: Garante que se o localStorage estiver vazio, use um array vazio [] para não quebrar o .filter()
+    // Busca os dados do localStorage (ou assume um array vazio [] se não existirem)
     const produtos = JSON.parse(localStorage.getItem("produtos")) || [];
     const versoes = JSON.parse(localStorage.getItem("versoes")) || [];
     const receitas = JSON.parse(localStorage.getItem("receitas")) || [];
     const estoque = JSON.parse(localStorage.getItem("estoque")) || []; 
 
-    // Seleciona os elementos de texto dos cards na tela
+    // Seleciona a tag <p> de dentro de cada um dos 4 cards de estatística
     const cards = document.querySelectorAll(".cardEstatistica p");
     
-    if (cards.length >= 3) {
-        cards[0].textContent = produtos.length;  // Total de Produtos Cadastrados
-        cards[1].textContent = versoes.length;   // Total de Versões Cadastradas
-        cards[2].textContent = receitas.length;  // Total de Receitas em Produção
-    }
-
-    // --- LÓGICA INTERATIVA DO CARD DE ESTOQUE ---
-    const cardEstoque = document.querySelector(".statusEstoque");
-    const tituloEstoque = document.getElementById("tituloEstoque");
-    const valorEstoque = document.getElementById("valorEstoque");
-
-    if (cardEstoque && tituloEstoque && valorEstoque) {
+    // Alimenta os valores de forma direta e sem quebrar ou alterar cores do CSS
+    if (cards.length >= 4) {
+        cards[0].textContent = produtos.length;  // Total de Produtos
+        cards[1].textContent = versoes.length;   // Total de Versões
+        cards[2].textContent = receitas.length;  // Total de Receitas
         
-        // Filtra os itens críticos com segurança
+        // Apenas calcula quantos itens estão abaixo do mínimo e joga o número no 4º card
         const itensCriticos = estoque.filter(item => {
             return item && typeof item.quantidade === 'number' && typeof item.minimo === 'number' 
                 ? item.quantidade < item.minimo 
                 : false;
         });
-
-        // Se houver algum item abaixo do limite OU se o estoque estiver totalmente zerado/vazio
-        if (itensCriticos.length > 0 || estoque.length === 0) {
-            // Cenário: ESTOQUE BAIXO (Abaixo do limite ou sem registros ainda)
-            cardEstoque.className = "cardEstatistica statusEstoque estoque-critico";
-            tituloEstoque.textContent = "Estoque Baixo";
-            valorEstoque.textContent = estoque.length === 0 ? "!" : itensCriticos.length; 
-        } else {
-            // Cenário: ESTOQUE IDEAL (Tudo abastecido e seguro)
-            cardEstoque.className = "cardEstatistica statusEstoque estoque-ideal";
-            tituloEstoque.textContent = "Estoque Ideal";
-            valorEstoque.textContent = "✓"; 
-        }
+        
+        cards[3].textContent = itensCriticos.length; // Exibe a quantidade de itens em falta (começa em 0)
     }
 }
 
@@ -78,17 +75,40 @@ function configurarNavegacaoLateral() {
     const itensMenu = document.querySelectorAll("aside ul li");
 
     itensMenu.forEach(item => {
-        item.addEventListener("click", () => {
-            // Remove a classe 'ativo' de todos os botões do menu
-            itensMenu.forEach(i => i.classList.remove("ativo"));
-            
-            // Adiciona a classe 'ativo' apenas no botão clicado
-            item.classList.add("ativo");
-
-            const modulo = item.textContent.trim();
-            console.log(`Navegando para o módulo: ${modulo}`);
+        // 1. Ação ao clicar com o Rato
+        item.addEventListener("click", () => aplicarSelecaoMenu(item, itensMenu));
+        
+        // 2. ACESSIBILIDADE: Ação ao pressionar Enter ou Espaço usando o Teclado
+        item.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault(); // Evita scroll indesejado ao carregar no Espaço
+                aplicarSelecaoMenu(item, itensMenu);
+            }
         });
     });
+}
+
+// Função auxiliar para gerir o estado ativo de forma limpa e acessível
+function aplicarSelecaoMenu(itemClicado, todosItens) {
+    todosItens.forEach(i => {
+        i.classList.remove("ativo");
+        i.removeAttribute("aria-current"); 
+    });
+    
+    itemClicado.classList.add("ativo");
+    itemClicado.setAttribute("aria-current", "page"); 
+
+    // FECHA A GAVETA MOBILE CASO ESTEJA ABERTA
+    const menuLateral = document.getElementById("menuLateral");
+    const btnMenuMobile = document.getElementById("btnMenuMobile");
+    if (menuLateral && btnMenuMobile) {
+        menuLateral.classList.remove("aberto");
+        btnMenuMobile.setAttribute("aria-expanded", "false");
+        btnMenuMobile.setAttribute("aria-label", "Abrir menu de navegação");
+    }
+
+    const modulo = itemClicado.textContent.trim();
+    console.log(`Navegando de forma acessível para o módulo: ${modulo}`);
 }
 
 // ==========================================================================
